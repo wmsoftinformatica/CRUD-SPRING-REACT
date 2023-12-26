@@ -3,7 +3,7 @@ const App = () =>{
     return (
      <>
      <Navbar/>
-     <h1> teste </h1>
+     
      </>   
     )
 
