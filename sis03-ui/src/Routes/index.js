@@ -37,7 +37,7 @@ function Layout() {
       <div>
         <h2>Nada pra você ver aqui!</h2>
         <p>
-          <Link to="/">ir para a pagina inicial</Link>
+          <Link to="/">ir para a pagina inicial teste</Link>
         </p>
       </div>
     );
