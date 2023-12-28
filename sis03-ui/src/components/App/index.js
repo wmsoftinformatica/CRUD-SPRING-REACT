@@ -1,10 +1,8 @@
-import Navbar from '../Navbar'
+import Router from '../../Routes';
+
 const App = () =>{
     return (
-     <>
-     <Navbar/>
-     
-     </>   
+     <Router/>
     )
 
 } 
