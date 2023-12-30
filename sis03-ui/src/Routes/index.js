@@ -2,7 +2,7 @@ import { Routes, Route, Outlet, Link } from "react-router-dom";
 import Navbar from '../components/Navbar';
 import Usuario from '../Page/Usuario';
 import Cliente from '../Page/Cliente';
-import Estoque from '../Page/Estoque';
+import Produto from '../Page/Produto';
 
 export default function Router(){
     return (
@@ -11,7 +11,7 @@ export default function Router(){
             <Route path="/" element={<Layout />}>
               <Route index element={<Usuario />} />
               <Route path="cliente" element={<Cliente />} />
-              <Route path="estoque" element={<Estoque />} />
+              <Route path="produto" element={<Produto />} />
     
               {/* Using path="*"" means "match anything", so this route
                     acts like a catch-all for URLs that we don't have explicit
