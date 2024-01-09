@@ -25,15 +25,19 @@ const listarProduto = async ()=>{
                       <tr>
                         <th>codigo</th>
                         <th>nome</th>
+                        <th>valor Unitario</th>
+                        <th>data Cadastro</th>
                       </tr>
                       
                     </thead>
                     <tbody>
                       {produtos.map( (item)=> {
                         return (
-                        <tr>
-                        <td>{item.codigo}</td>
-                        <td>{item.descricao}</td>
+                        <tr key={item.codigo}>
+                          <td>{item.codigo}</td>
+                          <td>{item.descricao}</td>
+                          <td>{item.valor_unitario}</td>
+                          <td>{item.data_cadastro}</td>
                         </tr>
                         )
                       }                     
