@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import Usuario from '../Page/Usuario';
 import Cliente from '../Page/Cliente';
 import Produto from '../Page/Produto';
+import Todos from '../Page/Todos';
 
 export default function Router(){
     return (
@@ -12,6 +13,7 @@ export default function Router(){
               <Route index element={<Usuario />} />
               <Route path="cliente" element={<Cliente />} />
               <Route path="produto" element={<Produto />} />
+              <Route path="todos" element={<Todos />} />
     
               {/* Using path="*"" means "match anything", so this route
                     acts like a catch-all for URLs that we don't have explicit

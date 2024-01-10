@@ -8,6 +8,7 @@ const Navbar = ()=> {
             <li><Link to="/">USUARIO</Link></li>
             <li><Link to="/cliente">CLIENTE</Link></li>
             <li><Link to="/produto">PRODUTO</Link></li>
+            <li><Link to="/todos">TODOS</Link></li>
             <li style={{float:"right"}}><a className = "active" href="SOBRE">SOBRE</a></li>
           </ul>  
         </div>

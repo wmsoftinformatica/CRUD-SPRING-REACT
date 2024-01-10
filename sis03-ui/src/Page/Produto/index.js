@@ -15,10 +15,10 @@ const listarProduto = async ()=>{
   },[])
 
     return(
-        <>
-          <div style={{display:"flex",  border:"3px solid#111", marginRight:"10px", marginLeft:"10px", marginTop:"10px", backgroundColor:""}}>
+        <div style={{display:"flex",  border:"3px solid#111", marginRight:"10px", marginLeft:"10px", marginTop:"10px", backgroundColor:"", justifyContent:"center"}}>
+          <div style={{marginRight:"10px", marginLeft:"10px", marginTop:"10px", marginBottom:"10px", backgroundColor:""}}>
            
-               {/* <h1>PRODUTO </h1> */}
+                <h1>PRODUTO </h1> 
               
                   <table border="1">
                     <thead>
@@ -50,7 +50,7 @@ const listarProduto = async ()=>{
             
             
           </div>
-        </>
+        </div>
        
     )
 }
