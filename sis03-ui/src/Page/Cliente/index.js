@@ -1,6 +1,8 @@
 
 import { useEffect, useState } from "react";
-import { getClientes } from "../../services/ClienteService";
+import { getClientes, postCliente } from "../../services/ClienteService";
+
+import { useForm } from "react-hook-form";
 
 const Cliente = ()=>{
 
@@ -14,6 +16,20 @@ const Cliente = ()=>{
    useEffect(()=>{
     listarCliente();
    },[])
+
+   const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm({
+    defaultValues: {
+      nome: ""
+    }
+  });
+
+  const onSubmit = async (data) => {
+    await postCliente(data);
+  }
 
     return(
       <div style={{display:"flex", border:"3px solid#111", marginRight:"10px", marginLeft:"10px", marginTop:"10px", justifyContent:"center"}}>
@@ -37,11 +53,17 @@ const Cliente = ()=>{
                   })}
                 </tbody>
               </table>
-         </div>
-          
-        
+         
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+              >
+                <label>Nome</label>
+                <input name="nome" ref={register({ required: true})} defaultValue="" />
+                {errors.nome && <p>campo obrigatorio</p>}
+                <input type="submit" />
+              </form>
+          </div>
       </div>
-       
     )
 }
 export default Cliente;

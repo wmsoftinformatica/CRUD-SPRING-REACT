@@ -5,3 +5,12 @@ export const getClientes = async () => {
     console.log("Listar Clientes", resposta.data);
     return resposta.data
 }
+
+export const postCliente = async (data)=> {
+
+    await api.post('/cliente',data,{
+        headers: {
+        'Content-Type': 'application/json'
+        }
+    });
+}

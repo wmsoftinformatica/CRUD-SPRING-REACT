@@ -31,6 +31,7 @@ public class ClienteController {
 	}
 	
 	@PostMapping
+	@CrossOrigin(origins = "*")
 	public Cliente post(@RequestBody Cliente cliente) {
 		return clienteRepository.save(cliente);
 		
