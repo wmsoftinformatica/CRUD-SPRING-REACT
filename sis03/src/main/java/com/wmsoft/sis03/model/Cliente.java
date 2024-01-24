@@ -20,7 +20,7 @@ public class Cliente {
 	private String bairro;
 	private String uf;
 	private String telefone;
-	private Date data_cadastro;
+	private Date data_cadastro = new Date();
 	public Long getCodigo() {
 		return codigo;
 	}
