@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,21 +24,18 @@ public class ClienteController {
 	ClienteRepository clienteRepository;
 	
 	@GetMapping
-	@CrossOrigin(origins = "*")
 	public List<Cliente> getAll(){
 		
 		return clienteRepository.findAll();
 	}
 	
-	@PostMapping
-	@CrossOrigin(origins = "*")
+	@PostMapping	
 	public Cliente post(@RequestBody Cliente cliente) {
 		return clienteRepository.save(cliente);
 		
 	}
 	
 	@PutMapping
-	@CrossOrigin(origins = "*")
 	public void put(@RequestBody Cliente cliente) {
 		
 		Optional<Cliente> clienteEncontrado = buscarPeloCodigo(cliente.getCodigo());
@@ -50,7 +46,6 @@ public class ClienteController {
 	}
 	
 	@DeleteMapping(path="/{codigo}")
-	@CrossOrigin(origins = "*")
 	public String deletarPorPathVariable(@PathVariable Long codigo) {
 		
 		Optional<Cliente> resposta = clienteRepository.findById(codigo);
