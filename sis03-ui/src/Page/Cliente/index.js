@@ -1,12 +1,13 @@
 
 import { useEffect, useState } from "react";
-import { getClientes, postCliente } from "../../services/ClienteService";
+import { deleteCliente, getClientes, postCliente, putCliente } from "../../services/ClienteService";
 
 import { useForm } from "react-hook-form";
 
 const Cliente = ()=>{
 
   const [clientes, setClientes] = useState([]);
+  const [isEdit,setIsEdit] = useState(false);
 
    const listarCliente = async () => {
       const resposta = await getClientes();
@@ -20,17 +21,55 @@ const Cliente = ()=>{
    const {
     register,
     handleSubmit,
+    reset,
+    getValues,
+    setValue,
     formState: { errors }
   } = useForm({
     defaultValues: {
+      codigo:"",
       nome: "",
-      endereco: ""
-      
+      endereco: "",
+      bairro: "",
+      uf: "",
+      telefone: ""
     }
   });
 
   const onSubmit = async (data) => {
-    await postCliente(data);
+    if(isEdit){
+      const response = await putCliente(data);
+      if(response){
+        reset()
+        listarCliente();
+        setIsEdit(false);
+      }
+    }else{
+      const response = await postCliente(data);
+      if(response){
+        reset()
+        listarCliente();
+      }
+    }
+  }
+
+  const onDelete = async (id) => {
+    console.log(id);
+    const response = await deleteCliente(id);
+    if(response)
+    listarCliente();
+    
+  }
+
+  const onEdit = async (cliente) =>{
+    console.log(cliente);
+    setIsEdit(true);
+    setValue("codigo",cliente.codigo)
+    setValue('nome',cliente.nome);
+    setValue('endereco',cliente.endereco);
+    setValue('bairro',cliente.bairro);
+    setValue('uf', cliente.uf);
+    setValue('telefone',cliente.telefone)
   }
 
     return(
@@ -52,6 +91,7 @@ const Cliente = ()=>{
                     <th>UF</th>
                     <th>Telefone</th>
                     <th>Data Cadastro</th>
+                    <th>Ações</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -65,6 +105,10 @@ const Cliente = ()=>{
                         <td>{item.uf}</td>
                         <td>{item.telefone}</td>
                         <td>{item.data_cadastro}</td>
+                        <td>
+                          <button onClick={()=> onEdit(item)}>Editar</button>
+                          <button onClick={()=> onDelete(item.codigo)}>Excluir</button>
+                        </td>
 
                       </tr>
                     )
@@ -83,6 +127,9 @@ const Cliente = ()=>{
                     <div style={{display:"block", height:"100px", width:"800px", border:"3px solid#111", padding:"10px"}}>
 
                           <div style={{display:"flex", justifyContent:"center"}}>
+
+                              <input name="codigo" ref={register()} defaultValue="" readOnly  hidden/>
+
                               <label style={{marginLeft:"10px", marginRight:"10px"}}>Nome: </label>
                               <input name="nome" ref={register({ required: true})} defaultValue="" />
                               {errors.nome && <p>campo obrigatorio</p>}
@@ -115,11 +162,6 @@ const Cliente = ()=>{
                     </div>
                     
              </div>
-                         
-                
-               
-                 
-                
               </form>
           </div>
       </div>

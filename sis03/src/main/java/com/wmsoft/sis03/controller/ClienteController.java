@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,7 +38,19 @@ public class ClienteController {
 		
 	}
 	
-	@DeleteMapping(path="/codigo/{codigo}")	
+	@PutMapping
+	@CrossOrigin(origins = "*")
+	public void put(@RequestBody Cliente cliente) {
+		
+		Optional<Cliente> clienteEncontrado = buscarPeloCodigo(cliente.getCodigo());
+		if(clienteEncontrado.isPresent()) {			
+			clienteRepository.save(cliente);
+		}
+		
+	}
+	
+	@DeleteMapping(path="/{codigo}")
+	@CrossOrigin(origins = "*")
 	public String deletarPorPathVariable(@PathVariable Long codigo) {
 		
 		Optional<Cliente> resposta = clienteRepository.findById(codigo);
@@ -60,5 +73,13 @@ public class ClienteController {
 		clienteRepository.deleteById(cliente.getCodigo());
 		
 		return "CLIENTE DELETADO " + cliente.getCodigo();
+	}
+	
+	public Optional<Cliente> buscarPeloCodigo(Long codigo) {
+		Optional<Cliente> clienteEncontrado = clienteRepository.findById(codigo);
+//		if (!pessoaSalva.isPresent()) {
+//			throw new EmptyResultDataAccessException(1);
+//		}
+		return clienteEncontrado;
 	}
 }
