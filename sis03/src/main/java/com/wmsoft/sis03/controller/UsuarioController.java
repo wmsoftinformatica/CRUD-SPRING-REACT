@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wmsoft.sis03.model.Cliente;
 import com.wmsoft.sis03.model.Usuario;
 import com.wmsoft.sis03.repository.UsuarioRepository;
 
@@ -38,6 +40,14 @@ public class UsuarioController {
 		
 	}
 	
+	@PutMapping
+	public void put(@RequestBody Usuario usuario) {
+		Optional<Usuario> usuarioEncontrado = buscarPeloCodigo(usuario.getCodigo());
+		if(usuarioEncontrado.isPresent()) {
+			usuarioRepostory.save(usuario);
+		}
+	}
+	
 	@DeleteMapping
 	public String deletarUsuarioRequestBody(@RequestBody Usuario usuario) {
 		
@@ -60,6 +70,12 @@ public class UsuarioController {
 		usuarioRepostory.deleteById(codigo);
 		
 		return "CODIGO DELETADO " + codigo;
+	}
+	
+	public Optional<Usuario> buscarPeloCodigo(Long codigo) {
+		Optional<Usuario> usuarioEncontrado = usuarioRepostory.findById(codigo);
+
+	    return usuarioEncontrado;
 	}
 
 }
