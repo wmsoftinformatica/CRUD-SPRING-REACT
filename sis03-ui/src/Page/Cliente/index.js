@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 const Cliente = ()=>{
 
   const [clientes, setClientes] = useState([]);
-  const [isEdit,setIsEdit] = useState(false);
+  
 
    const listarCliente = async () => {
       const resposta = await getClientes();
@@ -35,22 +35,34 @@ const Cliente = ()=>{
       telefone: ""
     }
   });
-
+function atualizar(){
+  reset();
+  listarCliente();
+}
   const onSubmit = async (data) => {
-    if(isEdit){
-      const response = await putCliente(data);
-      if(response){
-        reset()
-        listarCliente();
-        setIsEdit(false);
-      }
+   let response; 
+    data.codigo ? response = await putCliente(data):response = await postCliente(data);
+
+    if(response){
+      atualizar();
+      alert("ATUALIZADO COM SUCESSO");
     }else{
-      const response = await postCliente(data);
-      if(response){
-        reset()
-        listarCliente();
-      }
+      alert("ERRO AO ATUALIZARS");
     }
+    // if(isEdit){
+    //   const response = await putCliente(data);
+    //   if(response){
+    //     reset()
+    //     listarCliente();
+    //     setIsEdit(false);
+    //   }
+    // }else{
+    //   const response = await postCliente(data);
+    //   if(response){
+    //     reset()
+    //     listarCliente();
+    //   }
+    // }
   }
 
   const onDelete = async (id) => {
@@ -63,7 +75,7 @@ const Cliente = ()=>{
 
   const onEdit = async (cliente) =>{
     console.log(cliente);
-    setIsEdit(true);
+    
     setValue("codigo",cliente.codigo)
     setValue('nome',cliente.nome);
     setValue('endereco',cliente.endereco);
