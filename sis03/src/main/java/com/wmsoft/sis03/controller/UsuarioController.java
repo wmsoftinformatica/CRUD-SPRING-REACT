@@ -34,7 +34,7 @@ public class UsuarioController {
 	}
 	
 	@PostMapping
-	public Usuario salvarUsuario(@RequestBody Usuario usuario) {
+	public Usuario post(@RequestBody Usuario usuario) {
 		
 		return usuarioRepostory.save(usuario);
 		
@@ -60,7 +60,7 @@ public class UsuarioController {
 		return "CODIGO DELETADO " + usuario.getCodigo();
 	}
 	
-	@DeleteMapping(path = "/codigo/{codigo}")
+	@DeleteMapping(path = "/{codigo}")
 	public String deletarUsuarioPathVariable(@PathVariable Long codigo) {
 		
 		Optional<Usuario> resposta = usuarioRepostory.findById(codigo);

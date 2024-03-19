@@ -16,7 +16,7 @@ export const putUsuario = async (data)=> {
 }
 export const postUsuario = async(data) => {
 
-    const response = await api.post('/usurio',data,{
+    const response = await api.post('/usuario',data,{
         headers:{
             'Content-Type':'application/json'        }
     });
