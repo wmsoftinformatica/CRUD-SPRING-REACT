@@ -47,22 +47,9 @@ function atualizar(){
       atualizar();
       alert("ATUALIZADO COM SUCESSO");
     }else{
-      alert("ERRO AO ATUALIZARS");
+      alert("ERRO AO ATUALIZAR");
     }
-    // if(isEdit){
-    //   const response = await putCliente(data);
-    //   if(response){
-    //     reset()
-    //     listarCliente();
-    //     setIsEdit(false);
-    //   }
-    // }else{
-    //   const response = await postCliente(data);
-    //   if(response){
-    //     reset()
-    //     listarCliente();
-    //   }
-    // }
+    
   }
 
   const onDelete = async (id) => {
@@ -76,12 +63,12 @@ function atualizar(){
   const onEdit = async (cliente) =>{
     console.log(cliente);
     
-    setValue("codigo",cliente.codigo)
+    setValue("codigo",cliente.codigo);
     setValue('nome',cliente.nome);
     setValue('endereco',cliente.endereco);
     setValue('bairro',cliente.bairro);
     setValue('uf', cliente.uf);
-    setValue('telefone',cliente.telefone)
+    setValue('telefone',cliente.telefone);
   }
 
     return(
